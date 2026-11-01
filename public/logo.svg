@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-label="How Well Do You Know Me?">
+  <circle cx="40" cy="40" r="38" fill="#2C2118"/>
+  <rect x="12" y="26" width="32" height="28" rx="10" fill="#C4542C" transform="rotate(-10 28 40)"/>
+  <rect x="36" y="22" width="32" height="28" rx="10" fill="#E0A322" transform="rotate(8 52 36)"/>
+  <path d="M34 34c0-6 4.2-9 8.2-9 4.2 0 7.3 2.6 7.3 6.4 0 3.2-2 5-4.4 6.6-2.2 1.4-3.2 2.4-3.2 4.2" fill="none" stroke="#FFF6EA" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="42" cy="50.5" r="2.1" fill="#FFF6EA"/>
+</svg>

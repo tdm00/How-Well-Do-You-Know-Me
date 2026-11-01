@@ -1,0 +1,17 @@
+# Example unit. Copy it by hand. The GitHub Action does not install it.
+# One process only: the app keeps a SQLite file and an in-memory live channel.
+
+[Unit]
+Description=How Well Do You Know Me
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/do-you-know-me
+Environment=NODE_ENV=production
+Environment=DATABASE_PATH=/var/www/do-you-know-me/data/game.db
+ExecStart=/usr/bin/npm run start -- --port 3000
+Restart=on-failure
+User=www-data
+
+[Install]
+WantedBy=multi-user.target

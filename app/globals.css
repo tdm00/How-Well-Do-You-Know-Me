@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f3e6d4;
+  color: #2c2118;
+  font-family: var(--font-text), "Segoe UI", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: #e0a322;
+  color: #2c2118;
+}
+
+@keyframes score-tick {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.16);
+    color: #e0a322;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.score-tick {
+  display: inline-block;
+  animation: score-tick 480ms ease;
+}
+
+@keyframes reveal-flip {
+  0% {
+    transform: rotateX(88deg);
+    opacity: 0.2;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.reveal-flip {
+  animation: reveal-flip 420ms ease;
+  transform-origin: center top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-tick,
+  .reveal-flip {
+    animation: none;
+  }
+}
