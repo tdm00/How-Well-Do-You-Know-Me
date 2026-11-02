@@ -51,6 +51,7 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script_stop: true
+          command_timeout: 20m
           script: |
             cd /opt/know-me
             git pull --ff-only
