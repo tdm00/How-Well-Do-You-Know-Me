@@ -1,0 +1,6 @@
+{$DOMAIN} {
+	reverse_proxy app:3000 {
+		# Flush each chunk immediately so SSE for the TV and host is not buffered.
+		flush_interval -1
+	}
+}

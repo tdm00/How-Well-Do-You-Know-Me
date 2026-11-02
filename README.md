@@ -29,4 +29,4 @@ npm run test:e2e
 
 ## Deploy
 
-Tests run on every push and pull request. A push to `main` can restart the app on the droplet behind `do-you-know-me.hobbybin.xyz` after those tests pass. Setup is by hand. See [DEPLOY.md](DEPLOY.md).
+Tests run on every push and pull request. A push to `main` can deploy to `https://know-me.hobbybin.xyz` after those tests pass. Setup is by hand. See [DEPLOY.md](DEPLOY.md) and [docs/SERVER-SETUP.md](docs/SERVER-SETUP.md).
