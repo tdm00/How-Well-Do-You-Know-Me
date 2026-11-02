@@ -30,11 +30,28 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Restart the app behind the existing web server
+      - name: Check droplet secrets
+        id: gate
         env:
-          DROPLET_SSH_KEY: ${{ secrets.DROPLET_SSH_KEY }}
           DROPLET_HOST: ${{ secrets.DROPLET_HOST }}
-          DROPLET_USER: ${{ secrets.DROPLET_USER }}
-          DROPLET_APP_DIR: ${{ secrets.DROPLET_APP_DIR }}
-        run: bash deploy/ci-deploy.sh
+        run: |
+          if [ -z "$DROPLET_HOST" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "DROPLET_HOST is not set, skipping deploy."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      # The droplet keeps a clone at /opt/know-me. .env and data/ stay on the server.
+      # One app container only: SQLite and the live channel live in that process.
+      - name: Deploy
+        if: steps.gate.outputs.skip != 'true'
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            cd /opt/know-me
+            git pull --ff-only
+            docker compose --env-file .env -f deploy/docker-compose.yml up -d --build
