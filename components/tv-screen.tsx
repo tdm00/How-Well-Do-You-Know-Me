@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Leaderboard } from "@/components/leaderboard";
 import { Logo } from "@/components/logo";
+import { TvJoin } from "@/components/tv-join";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -87,9 +88,7 @@ function QuestionStage({ state }: { state: TvState }) {
         >
           {state.code}
         </p>
-        <p className="mt-6 max-w-3xl text-[clamp(1.5rem,2.2vw,2.6rem)] leading-snug text-cream/85">
-          Open How Well Do You Know Me, choose Phone, and enter this code.
-        </p>
+        <TvJoin code={state.code} />
         <ul className="mt-8 grid gap-3">
           {state.teams.map((team) => (
             <li key={team.id} className="text-[clamp(1.4rem,2vw,2.2rem)]">
