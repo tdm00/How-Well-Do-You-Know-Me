@@ -32,6 +32,12 @@ test("two teams answer, reveal, and score one question", async ({ browser }) => 
   const tv = await tvContext.newPage();
   await tv.goto(`/tv?code=${code}`);
   await expect(tv.getByTestId("tv-room-code")).toHaveText(code);
+  const tvOrigin = new URL(tv.url()).origin;
+  await expect(tv.getByTestId("tv-join-host")).toHaveText(new URL(tv.url()).host);
+  await expect(tv.getByTestId("tv-join-qr")).toHaveAttribute(
+    "data-join-url",
+    `${tvOrigin}/play?code=${code}`,
+  );
 
   const alex = await joinPlayer(browser, code, "Alex");
   const blair = await joinPlayer(browser, code, "Blair");
